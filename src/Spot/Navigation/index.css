@@ -13,16 +13,16 @@
 
 .nav-link {
     transition: background-color 0.3s; 
-    color: purple;
+    color: #7009e3;
   }
 
 
   .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
-    color: #8017f5;
+    color: #a256f8;
   }
   .nav-link:focus {
-    color: #8017f5;
+    color: #a256f8;
   }
 
   .kb-active .nav-link {

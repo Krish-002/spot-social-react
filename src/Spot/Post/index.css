@@ -1,0 +1,75 @@
+.kb-screen-header{
+    color: #a256f8;
+}
+
+.kb-button-large {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+  }
+  
+  .kb-input-group {
+    width: auto;
+  }
+  
+  /* index.css */
+.kb-fullscreen {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kb-full-width {
+    width: 100vw; /* Full viewport width */
+}
+
+.kb-half-screen {
+    flex: 1; /* Each section takes half of the available space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Half of the viewport height for these sections */
+}
+
+.kb-half-screen:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.kb-button-large {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    color:  #a256f8;
+}
+.kb-button-large-text{
+    font-size: 1rem;
+    padding: 10px 20px;
+    color:  #a256f8;
+}
+
+.kb-input-group {
+    flex-direction: flex; /* Stack the input and button vertically */
+    padding: 0 50px
+}
+
+.kb-search-button {
+    margin-top: 10px; /* Spacing between input and button */
+}
+
+.kb-search-bar{
+    color: black;
+}
+
+.kb-post-button {
+    color:  #a256f8;
+    
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    width: 200px; /* Fixed width for consistency */
+    margin: 20px auto; /* Center the button horizontally and add top margin */
+    display: block; /* This makes margin auto effective for centering */
+}
+
+.kb-post-button:hover {
+background-color:rgba(255, 255, 255, 0.1);
+color:  #a256f8
+}

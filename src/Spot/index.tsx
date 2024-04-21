@@ -1,6 +1,7 @@
 import SpotNavigation from "./Navigation";
 import AdminHomePage from "./Admin";
 import PostScreen from "./Post";
+import Profile from "./Profile";
 import "./index.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -15,7 +16,7 @@ const Spot = () => {
 
     <Routes>
       <Route path="/" element={<Navigate to="/Feed" />} />
-      <Route path="/Profile/*" element={<h1>Profile</h1>} />
+      <Route path="/Profile/*" element={<Profile/>} />
       <Route path="/Post/*" element={<PostScreen />} />
       <Route path="/Admin" element={<AdminHomePage />} />
       <Route path="/Feed" element={<h1>Feed</h1>} />

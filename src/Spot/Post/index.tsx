@@ -19,11 +19,11 @@ function PostScreen() {
                     <div className="btn kb-button-large-text">Choose a Picture</div>
                 </div>
 
-                    <div className="main">
+                    <div className="d-flex flex-column justify-content-center align-items-center kb-half-screen kb-input-group">
                         <Routes>
                             <Route path="/" element={<Home />}/>
                             <Route path="/redirect" element={<RedirectPage />} />
-                            <Route path="/dashboard" element={<Dashboard />} />
+                            <Route path="/Dashboard" element={<Dashboard />} />
                             <Route element={<NotFoundPage />} />
                         </Routes>
                     </div>

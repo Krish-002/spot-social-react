@@ -1,0 +1,35 @@
+.post-view-container {
+    max-width: 100%;
+    overflow-y: auto;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.post-card {
+    width: 90%; /* Adjust based on your design preference */
+    margin-bottom: 20px;
+    background-color: black; /* Set the background color to black */
+    border: 1px solid purple; /* Set the border color to purple */
+    color: white; /* Set the text color to white for better readability on a dark background */
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.profile-info {
+    font-weight: bold;
+    color: white; /* Ensure text is visible against the dark background */
+}
+
+.username-text {
+    color: #d8b5ff; /* A light purple shade for the username text */
+    font-size: 0.9em;
+}

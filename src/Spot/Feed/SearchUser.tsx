@@ -19,6 +19,7 @@ const SearchUser = () => {
         if (username.trim()) {  // Check if the username input is not just empty spaces
             try {
                 const response = await client.getUsersByUsername(username);
+                console.log("Users:", response);
                 setUsers(response || []); // Ensure that response.data is used, assuming the API call is correct
             } catch (error) {
                 console.error("Failed to fetch users:", error);

@@ -1,19 +1,26 @@
 import React from 'react';
 import { Image, ListGroup } from 'react-bootstrap';
-import _ from 'lodash';
+import { useDispatch } from 'react-redux';
+import { setSelectedTrack } from '../Reducers/tracks'; // Correct path is needed
 import { TrackItem } from './Models/track'; // Assuming path is correct
-//another comment
 
 interface TracksListProps {
   tracks: TrackItem[];
 }
 
 const TracksList: React.FC<TracksListProps> = ({ tracks }) => {
+  const dispatch = useDispatch();
+
+  // Function to handle track selection
+  const handleSelectTrack = (track: TrackItem) => {
+    dispatch(setSelectedTrack(track));  // Dispatching action to set selected track
+  };
+
   return (
     <div style={{ overflowY: 'auto', height: '80vh' }}> {/* Scrollable list container */}
       <ListGroup>
         {tracks.map((track, index) => (
-          <ListGroup.Item key={index} style={{ display: 'flex', alignItems: 'center', padding: '10px' }}>
+          <ListGroup.Item key={index} style={{ display: 'flex', alignItems: 'center', padding: '10px' }} onClick={() => handleSelectTrack(track)}>
             <a
               href={track.external_urls.spotify}
               target="_blank"
@@ -43,4 +50,4 @@ const TracksList: React.FC<TracksListProps> = ({ tracks }) => {
   );
 };
 
-export default TracksList; 
+export default TracksList;

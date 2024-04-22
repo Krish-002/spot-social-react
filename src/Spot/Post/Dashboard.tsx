@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { initiateGetResult } from './Result/Results';
 import SearchResult from './SearchResult';
 import SearchForm from './SearchForm';
-import Header from './Header';
 import Loader from './Loader';
 import { RootState } from '../Store';
 import { AppDispatch } from '../Store';
+import SelectedTrackDisplay from './SelectedTrack';
 
 const Dashboard: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -32,17 +32,18 @@ const Dashboard: React.FC = () => {
     };
     
 
-  return (
-    <React.Fragment>
-      <SearchForm handleSearch={handleSearch} />
-      <Loader show={isLoading}>Loading...</Loader>
-      {tracks.items.length > 0 ? (
-        <SearchResult result={{ tracks }} />
-      ) : (
-        isLoading || <p>No tracks found. Try a different search.</p>
-      )}
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+            <SelectedTrackDisplay />
+            <SearchForm handleSearch={handleSearch} />
+            <Loader show={isLoading}>Loading...</Loader>
+            {tracks.items.length > 0 ? (
+                <SearchResult result={{ tracks }} />
+            ) : (
+                isLoading || <p>No tracks found. Try a different search.</p>
+            )}
+        </React.Fragment>
+    );
 };
 
 export default Dashboard;

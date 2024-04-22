@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Store";
 import RedirectPage from "./Post/RedirectPage";
+import Feed from "./Feed";
 
 const Spot = () => {
   return (
@@ -19,7 +20,7 @@ const Spot = () => {
       <Route path="/Profile/*" element={<Profile/>} />
       <Route path="/Post/*" element={<PostScreen />} />
       <Route path="/Admin" element={<AdminHomePage />} />
-      <Route path="/Feed" element={<h1>Feed</h1>} />
+      <Route path="/Feed" element={<Feed />} />
       <Route path="/redirect" element={<RedirectPage />} />
     </Routes>
   </div>

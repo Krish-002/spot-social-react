@@ -4,6 +4,8 @@ import GymSplit from './GymSplit';
 import MealPlan from './MealPlan';
 import GymStatistics from './GymStatistics';
 import Post from './Post';
+import { FaCalendarAlt, FaUtensils, FaDumbbell } from 'react-icons/fa';
+import "./index.css";
 
 interface UserProfile {
   firstName: string;
@@ -58,7 +60,6 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // Example user ID from your user example provided
         const userId = "6624bd98b942154f8f0e048e";
         const { data } = await axios.get<UserProfile>(`http://localhost:4000/api/users/${userId}`);
         setUserProfile(data);
@@ -66,41 +67,38 @@ const Profile: React.FC = () => {
         console.error('Error fetching profile data', error);
       }
     };
-
     fetchProfile();
   }, []);
 
-
   return (
-    <div className="container mt-4">
-      <div className="row align-items-center">
-        <div className="col-auto">
-          <img src={userProfile.profilePictureUrl || 'default-profile.png'} alt="Profile" className="img-fluid rounded-circle" style={{ width: '100px', height: '100px' }} />
-        </div>
-        <div className="col">
-          <h1 className="display-4">{userProfile.firstName} {userProfile.lastName}</h1>
-          <h2 className="lead">@{userProfile.username}</h2>
+    <div className="container">
+      <div className="profile-header">
+        <img src={userProfile.profilePictureUrl || 'default-profile.png'} alt="Profile" className="profile-picture" />
+        <div>
+          <h1 className="profile-title">{userProfile.firstName} {userProfile.lastName}</h1>
+          <h2 className="profile-username">@{userProfile.username}</h2>
         </div>
       </div>
-      <div className="row mt-3">
-        <div className="col-md-3 mb-3">
+      <div className="profile-sections">
+        <div className="profile-column">
+          <h3 className="heading"><FaCalendarAlt className="header-icon" />Gym Splits</h3>
           <GymSplit splits={userProfile.gymSplits} />
         </div>
-        <div className="col-md-3 mb-3">
+        <div className="profile-column">
+          <h3 className="heading"><FaUtensils className="header-icon" />Meal Plan</h3>
           <MealPlan mealPlans={userProfile.mealPlans} />
         </div>
-        <div className="col-md-3 mb-3">
+        <div className="profile-column">
+          <h3 className="heading"><FaDumbbell className="header-icon" />Gym Stats</h3>
           <GymStatistics statistics={userProfile.gymStatistics} />
         </div>
       </div>
-      <div className="row mt-3">
-        <div className="col">
-          <h3>User Posts</h3>
-          {userProfile.posts.map((post, index) => (
-            <Post key={index} {...post} />
-          ))}
-        </div>
+      <div className="posts-header">
+        <h3>User Posts</h3>
       </div>
+      {userProfile.posts.map((post, index) => (
+        <Post key={index} {...post} />
+      ))}
     </div>
   );
 }

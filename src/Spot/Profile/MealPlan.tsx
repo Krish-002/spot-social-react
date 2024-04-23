@@ -7,12 +7,11 @@ interface MealPlanProps {
 const MealPlan: React.FC<MealPlanProps> = ({ mealPlans }) => {
     return (
         <div>
-            <h3>Meal Plans</h3>
-            <ul>
-                {mealPlans.map((plan, index) => (
-                    <li key={index}><a href={plan} target="_blank" rel="noopener noreferrer">Meal Plan Link</a></li>
-                ))}
-            </ul>
+            {mealPlans.map((plan, index) => (
+                <a key={index} href={plan} target="_blank" rel="noopener noreferrer" className="meal-plan-item">
+                    {`Meal Plan ${index + 1}`}
+                </a>
+            ))}
         </div>
     );
 }

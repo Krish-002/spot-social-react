@@ -10,12 +10,12 @@ interface GymSplitProps {
 const GymSplit: React.FC<GymSplitProps> = ({ splits }) => {
     return (
         <div>
-            <h3>Gym Splits</h3>
-            <ul>
-                {splits.map((split, index) => (
-                    <li key={index}>{split.dayOfWeek}: {split.musclesTrained.join(', ')}</li>
-                ))}
-            </ul>
+            {splits.map((split, index) => (
+                <div key={index} className="gym-split-item">
+                    <div className="day-of-week">{split.dayOfWeek}</div>
+                    <div className="muscles-trained">{split.musclesTrained.join(', ')}</div>
+                </div>
+            ))}
         </div>
     );
 }

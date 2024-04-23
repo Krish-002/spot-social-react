@@ -1,14 +1,25 @@
-.profile-image {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px;
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center horizontally */
+    padding: 20px; /* Space around the search bar */
 }
 
-.profile-info {
-    font-weight: bold;
-    color: black;
+.form-control {
+    width: 30%; /* Control the width of the input */
+    margin: auto; /* Center the input horizontally */
+    background-color: black;
+    color: white; /* Text color */
+    border-radius: 5px; /* Optional: Rounded corners */
+    border: 1px solid #6c757d; /* Subtle border, adjust color as needed */
 }
 
-.username-text {
-    color: #6c757d;
+.form-control::placeholder {
+    color: white; /* White placeholder text */
+}
+
+/* Ensure the search results are also centered */
+.list-group-search {
+    width: 30%;
+    margin: auto;
 }

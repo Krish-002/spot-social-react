@@ -38,7 +38,7 @@ const SearchUser = () => {
     }, [username]); // Trigger the effect when 'username' changes
 
     return (
-        <div>
+        <div className="search-container">
             <input
                 type="text"
                 className="form-control"
@@ -47,7 +47,7 @@ const SearchUser = () => {
                 onChange={(e) => setUsername(e.target.value)}
             />
             {username && (
-                <ListGroup className="mt-3">
+                <ListGroup className="list-group-search mt-3">
                     {users.length > 0 ? (
                         users.map(user => (
                             <ListGroup.Item key={user._id} className="d-flex align-items-center">
@@ -58,7 +58,7 @@ const SearchUser = () => {
                                     alt="Profile"
                                 />
                                 <div>
-                                    <div className="profile-info">{user.firstName} {user.lastName}</div>
+                                    <div className="profile-info-search">{user.firstName} {user.lastName}</div>
                                     <div className="username-text">{user.username}</div>
                                 </div>
                             </ListGroup.Item>

@@ -1,35 +1,56 @@
 .post-view-container {
-    max-width: 100%;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content vertically */
+    width: 100%; /* Full width of the container */
+    overflow-y: auto; /* Allow vertical scrolling */
+    padding: 20px; /* Add some padding around the container */
 }
 
 .post-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
+    align-items: center; /* Center cards vertically */
+    width: 30%; /* Reduce width to make cards narrower */
+    max-width: 500px; /* Adjust maximum width of the post list */
+    margin: 0 auto; /* Center the list horizontally */
 }
 
 .post-card {
-    width: 90%; /* Adjust based on your design preference */
+    width: 100%; /* Full width of the post list */
     margin-bottom: 20px;
-    background-color: black; /* Set the background color to black */
-    border: 1px solid purple; /* Set the border color to purple */
-    color: white; /* Set the text color to white for better readability on a dark background */
+    background-color: black;
+    border: 1px solid purple;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Make content in the card stack vertically */
+}
+
+.card-body{
+    background-color: #222222;
+    border-radius: 20px;
+}
+
+.card-img-top {
+    width: 100%; /* Ensure the image covers the card width */
+    height: 450px; /* Increase height for images to make cards taller */
+    object-fit: contain; /* Resize the image to maintain its aspect ratio without cropping */
 }
 
 .profile-image {
-    width: 50px;
-    height: 50px;
+    width: 50px; /* Fixed width for profile images */
+    height: 50px; /* Fixed height for profile images */
     margin-right: 10px;
 }
 
-.profile-info {
-    font-weight: bold;
-    color: white; /* Ensure text is visible against the dark background */
+.profile-info,
+.username-text {
+    color: white; /* Ensuring text is readable on dark background */
+    padding: 0 10px; /* Add padding to align text inside card body */
 }
 
 .username-text {
-    color: #d8b5ff; /* A light purple shade for the username text */
+    color: #d8b5ff; /* Light purple shade for usernames */
     font-size: 0.9em;
 }

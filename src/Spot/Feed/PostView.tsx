@@ -30,12 +30,11 @@ export default function PostView() {
 
     return (
         <div className="post-view-container">
-            <h1>Post View</h1>
             <div className="post-list">
                 {posts.map(post => (
                     <Card key={post._id} className="post-card">
                         <Card.Img variant="top" src={post.imageUrl} />
-                        <Card.Body>
+                        <Card.Body className='card-body'>
                             <Button variant="link" className="text-danger">
                                 <FaHeart /> {post.likes.length}
                             </Button>

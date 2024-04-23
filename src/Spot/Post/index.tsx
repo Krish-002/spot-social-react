@@ -26,41 +26,27 @@ function PostScreen() {
         }
     };
 
-    const [post, setPost] = useState({imageUrl: '', songImageUrl: '', songName: '', artistName: '', likes:[]});
-
     const handlePost = async () => {
         if (!selectedTrack || !selectedImageFile) {
             alert("Please select both a song and an image.");
             return;
         }
 
-    
-
-    // Prepare the post object first, before setting the state.
-    const newPost = {
-        imageUrl: URL.createObjectURL(selectedImageFile), // Note: This URL should not be sent to the server, it's only useful on the client-side
-        songImageUrl: selectedTrack.album.images[0].url,
-        songName: selectedTrack.name,
-        artistName: selectedTrack.artists.map(artist => artist.name).join(", "),
-        likes: []
-    };
-
-    setPost(newPost); // Update the state if needed for other reasons
-
+        const formData = new FormData();
+        formData.append('image', selectedImageFile);
+        formData.append('songImageUrl', selectedTrack.album.images[0].url);
+        formData.append('songName', selectedTrack.name);
+        formData.append('artistName', selectedTrack.artists.map(artist => artist.name).join(", "));
 
         try {
-            console.log(newPost);
-            const response = await client.createPost(newPost);
-            console.log(response.data);
-            setSelectedImageFile(null); // Clear the selected image after posting
-            setPost({imageUrl: '', songImageUrl: '', songName: '', artistName: '', likes:[]}); // Clear the post object
-            dispatch(clearSelectedTrack()); // Clear the selected track in the Redux store
-
+            const response = await client.createPost(formData);
+            console.log(response);
+            setSelectedImageFile(null);
+            dispatch(clearSelectedTrack());
         } catch (error) {
             console.error(error);
         }
     };
-
     return (
         <div className="container-fluid text-center kb-fullscreen">
             <h1 className="my-4 kb-screen-header">POST</h1>

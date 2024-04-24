@@ -1,4 +1,5 @@
 import React from 'react';
+import './Post.css'; // Import the Post.css file
 
 interface PostProps {
     imageUrl: string;
@@ -10,17 +11,17 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ imageUrl, songImageUrl, songName, artistName, likes }) => {
     return (
-        <div className="card" style={{ width: '18rem' }}>
+        <div className="card">
             <img src={imageUrl} className="card-img-top" alt="Post" />
             <div className="card-body">
-                <div className="card-title">
+                <button className="heart-button">
                     <i className="fas fa-heart"></i> {likes.length}
-                </div>
+                </button>
                 <div className="d-flex align-items-center">
-                    <img src={songImageUrl} alt="Song" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                    <img src={songImageUrl} alt="Song" className="profile-image" />
                     <div>
-                        <p className="m-0">{songName}</p>
-                        <p className="card-text"><small>{artistName}</small></p>
+                        <p className="profile-info">{songName}</p>
+                        <p className="username-text">{artistName}</p>
                     </div>
                 </div>
             </div>

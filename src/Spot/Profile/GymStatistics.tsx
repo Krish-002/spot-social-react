@@ -11,12 +11,12 @@ interface GymStatisticsProps {
 const GymStatistics: React.FC<GymStatisticsProps> = ({ statistics }) => {
     return (
         <div>
-            <h3>Gym Statistics</h3>
-            <ul>
-                {statistics.map((stat, index) => (
-                    <li key={index}>{stat.exercise}: {stat.weight} {stat.unit}</li>
-                ))}
-            </ul>
+            {statistics.map((stat, index) => (
+                <div key={index} className="gym-stat-item">
+                    <div className="exercise">{stat.exercise}</div>
+                    <div className="weight-unit">{`${stat.weight} ${stat.unit}`}</div>
+                </div>
+            ))}
         </div>
     );
 }

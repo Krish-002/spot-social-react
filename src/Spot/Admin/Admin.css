@@ -1,0 +1,37 @@
+.kb-search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.kb-table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.kb-table th,
+.kb-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.kb-delete-btn,
+.kb-update-btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.kb-delete-btn {
+    background-color: red;
+    color: white;
+}
+
+.kb-update-btn {
+    background-color: green;
+    color: white;
+}

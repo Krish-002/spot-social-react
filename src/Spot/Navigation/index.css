@@ -1,31 +1,41 @@
-.kb-navbar-conatiner{
-    background-color: black;
-    width: 100%;
+/* Existing styles */
+.kb-navbar-conatiner {
+  background-color: black;
+  width: 100%;
 }
 
-
-
-
-.kb-navbar-items, .kb-navbar-items:hover, kb-navbar-items:focus{
-    width: 33%;
-    padding: 5px; 
-    text-align: center;
+.kb-navbar-items, .kb-navbar-items:hover, .kb-navbar-items:focus {
+  width: 33%;
+  padding: 5px; 
+  text-align: center;
 }
 
 .nav-link {
-    transition: background-color 0.3s; 
-    color: #7009e3;
-  }
+  transition: background-color 0.3s; 
+  color: #7009e3;
+}
 
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #a256f8;
+}
 
-  .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
-    color: #a256f8;
-  }
-  .nav-link:focus {
-    color: #a256f8;
-  }
+.nav-link:focus {
+  color: #a256f8;
+}
 
-  .kb-active .nav-link {
-    font-weight: bold; /* Optionally highlight the active link with bold text */
-  }
+.kb-active .nav-link {
+  font-weight: bold;
+}
+
+/* New styles for image resizing and centering */
+.img-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* Adjust top and bottom margins as needed */
+}
+
+.img-container img {
+  width: 150px; /* Set the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}

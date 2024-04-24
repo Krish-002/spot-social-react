@@ -33,7 +33,7 @@ export default function PostView() {
             <div className="post-list">
                 {posts.map(post => (
                     <Card key={post._id} className="post-card">
-                        <Card.Img variant="top" src={post.imageUrl} />
+                        <Card.Img className="card-img-top-feed" variant="top" src={post.imageUrl} />
                         <Card.Body className='card-body'>
                             <Button variant="link" className="text-danger">
                                 <FaHeart /> {post.likes.length}

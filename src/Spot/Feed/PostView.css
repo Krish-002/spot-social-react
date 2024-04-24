@@ -11,12 +11,13 @@
     display: flex;
     flex-direction: column;
     align-items: center; /* Center cards vertically */
-    width: 30%; /* Reduce width to make cards narrower */
-    max-width: 500px; /* Adjust maximum width of the post list */
+    width: 100%; /* Reduce width to make cards narrower */
+    max-width: 2000px; /* Adjust maximum width of the post list */
     margin: 0 auto; /* Center the list horizontally */
 }
 
 .post-card {
+    flex: none; /* Prevent cards from growing */
     width: 100%; /* Full width of the post list */
     margin-bottom: 20px;
     background-color: black;

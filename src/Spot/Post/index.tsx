@@ -31,7 +31,7 @@ function PostScreen() {
     const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
     const selectedTrack = useSelector((state: RootState) => state.tracks.selectedTrack);
     if (!user) {
-        return <div>Not logged in</div>;
+        return <div>Please Log in</div>;
     }
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {

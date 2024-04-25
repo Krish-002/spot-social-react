@@ -4,7 +4,7 @@ interface PostData {
     songImageUrl: string;
     songName: string;
     artistName: string;
-    likes: number;
+    likes: string[];
 }
 
 export default PostData;

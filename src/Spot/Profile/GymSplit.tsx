@@ -1,10 +1,8 @@
 import React from 'react';
+import GymSplitData from '../Interfaces/GymSplit';
 
 interface GymSplitProps {
-    splits: Array<{
-        dayOfWeek: string;
-        musclesTrained: string[];
-    }>;
+    splits: GymSplitData[];
 }
 
 const GymSplit: React.FC<GymSplitProps> = ({ splits }) => {

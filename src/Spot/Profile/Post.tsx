@@ -10,6 +10,7 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ imageUrl, songImageUrl, songName, artistName, likes }) => {
+    console.log('my print', imageUrl, songImageUrl, songName, artistName, likes);
     return (
         <div className="card">
             <img src={imageUrl} className="card-img-top" alt="Post" />

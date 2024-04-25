@@ -8,6 +8,7 @@ interface GymSplitProps {
 }
 
 const GymSplit: React.FC<GymSplitProps> = ({ splits }) => {
+    console.log(splits);
     return (
         <div>
             {splits.map((split, index) => (

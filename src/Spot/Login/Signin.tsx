@@ -40,6 +40,7 @@ export default function Signin() {
       <button className="btn btn-primary sp-btn-primary" onClick={handleSignin}>Signin</button>
       <button className="btn btn-secondary sp-btn-secondary" onClick={() => setShowSignupModal(true)}>Signup</button>
       <button className="btn btn-tertiary sp-btn-tertiary" onClick={() => navigate("/Spot/Feed")}>Continue as Guest</button>
+      <button className="btn btn-tertiary sp-btn-tertiary" onClick={() => navigate("/Spot/Admin/Signin")}>Proceed as Admin</button>
       {showSignupModal && (
         <div className="sp-modal">
           <div className="sp-modal-content">

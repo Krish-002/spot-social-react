@@ -1,11 +1,11 @@
-.form-container {
+.sp-form-container {
     background-color: black;
     color: white;
     padding: 20px;
     border-radius: 5px;
   }
   
-  .input-field {
+  .sp-input-field {
     background-color: black;
     color: white;
     border: 1px solid purple;
@@ -14,7 +14,7 @@
     width: calc(100% - 20px);
   }
   
-  .btn {
+  .sp-btn {
     padding: 10px 15px;
     margin-top: 10px;
     border: none;
@@ -23,27 +23,27 @@
     font-weight: bold;
   }
   
-  .btn-primary {
+  .sp-btn-primary {
     background-color: purple;
     color: white;
   }
   
-  .btn-secondary {
+  .sp-btn-secondary {
     background-color: purple;
     color: white;
   }
   
-  .btn-tertiary {
+  .sp-btn-tertiary {
     background-color: gray;
     color: white;
   }
   
-  .error {
+  .sp-error {
     color: red;
     margin-bottom: 10px;
   }
   
-  .modal {
+  .sp-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -55,7 +55,7 @@
     align-items: center;
   }
   
-  .modal-content {
+  .sp-modal-content {
     background-color: #f0f0f0; 
     padding: 20px;
     border-radius: 10px;
@@ -64,7 +64,7 @@
     width: 300px;
   }
 
-  .modal-content h1 {
+  .sp-modal-content h1 {
     color: black; 
   }
   

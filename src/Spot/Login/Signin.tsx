@@ -23,15 +23,15 @@ export default function Signin() {
         <div className="form-container">
             <h1>Signin</h1>
             {error && <div className="error">{error}</div>}
-            <input className="input-field" placeholder="Username" value={credentials.username} onChange={(e) => setCredentials({ ...credentials, username: e.target.value })} />
-            <input className="input-field" type="password" placeholder="Password" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
-            <button className="btn btn-primary" onClick={handleSignin}>Signin</button>
-            <button className="btn btn-secondary" onClick={() => setShowSignupModal(true)}>Signup</button>
-            <button className="btn btn-tertiary" onClick={() => navigate("/Spot/Feed")}>Continue as Guest</button>
+            <input className="sp-input-field" placeholder="Username" value={credentials.username} onChange={(e) => setCredentials({ ...credentials, username: e.target.value })} />
+            <input className="sp-input-field" type="password" placeholder="Password" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} />
+            <button className="btn btn-primary sp-btn-primary" onClick={handleSignin}>Signin</button>
+            <button className="btn btn-secondary sp-btn-secondary" onClick={() => setShowSignupModal(true)}>Signup</button>
+            <button className="btn btn-tertiary sp-btn-tertiary" onClick={() => navigate("/Spot/Feed")}>Continue as Guest</button>
 
             {showSignupModal && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="sp-modal">
+                    <div className="sp-modal-content">
                         <Signup closeModal={() => setShowSignupModal(false)} />
                     </div>
                 </div>

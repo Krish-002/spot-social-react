@@ -1,0 +1,51 @@
+/* Custom Modal Width */
+.sp-modal-lg {
+    max-width: 90%; /* Adjust this percentage based on your preference */
+}
+
+/* Grid Layout for Liked Posts inside the Modal Body */
+.sp-modal-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+    grid-gap: 20px; /* Space between grid items */
+    padding: 20px; /* Padding inside the modal body */
+}
+
+/* Style for each Liked Post card to ensure proper sizing and no squishing */
+.sp-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%; /* Ensure card uses all available vertical space */
+    margin: 0; /* Remove any default margin */
+    flex: 1 0 auto; /* Adjust growing and shrinking */
+    padding: 10px; /* Consistent with other card padding */
+}
+
+.sp-card-img-top {
+    width: 100%; /* Ensure image takes full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0; /* Optional: removes border radius if desired */
+}
+
+.sp-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Ensure text does not overflow */
+.sp-profile-info, .sp-username-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+/* Button styling, if needed to adjust */
+.sp-btn-secondary {
+    width: 100%; /* Make button stretch to the width of the card */
+    margin-top: 10px; /* Space between button and text */
+}

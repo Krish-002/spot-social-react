@@ -25,6 +25,7 @@
     border-radius: 20px;
     color: white;
     display: flex;
+    max-width: calc(33.33% - 40px);
     flex-direction: column; /* Make content in the card stack vertically */
 }
 
@@ -33,7 +34,7 @@
     border-radius: 20px;
 }
 
-.card-img-top {
+.kb-card-img-top {
     width: 100%; /* Ensure the image covers the card width */
     height: 450px; /* Increase height for images to make cards taller */
     object-fit: contain; /* Resize the image to maintain its aspect ratio without cropping */

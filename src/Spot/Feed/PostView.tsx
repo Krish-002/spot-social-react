@@ -109,7 +109,7 @@ export default function PostView() {
                         </Card.Body>
 
 
-                        <Card.Img className="card-img-top-feed" variant="top" src={post.imageUrl} />
+                        <Card.Img className="kb-card-img-top card-img-top-feed" variant="top" src={post.imageUrl} />
                         <Card.Body className='card-body'>
                             <Button onClick={() => handleLike(post._id)} variant="link" className="text-danger">
                                 <FaHeart /> {likeCounts[post._id] || 0}

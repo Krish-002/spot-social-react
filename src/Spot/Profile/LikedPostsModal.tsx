@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
-import Post from './Post';
+import './LikedPostsModal.css';  // Ensure this CSS file is correctly linked and includes the new styles
 import PostData from '../Interfaces/PostData';
 import * as client from './client';
 import { useSelector } from 'react-redux';
@@ -37,17 +37,22 @@ const LikedPostsModal: React.FC<LikedPostsModalProps> = ({ show, onHide }) => {
     };
 
     return (
-        <Modal show={show} onHide={onHide} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal show={show} onHide={onHide} size="xl" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Liked Posts
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {likedPosts.map((post, index) => (
-                    <LikedPost key={index} post={post} onDislike={handleDislike} />
-                ))}
-                {likedPosts.length === 0 && <p>No liked posts to display.</p>}
+                {likedPosts.length > 0 ? (
+                    <div className="sp-modal-body">  {/* Grid layout will apply here */}
+                        {likedPosts.map((post, index) => (
+                            <LikedPost key={index} post={post} onDislike={handleDislike} />
+                        ))}
+                    </div>
+                ) : (
+                    <p>No liked posts to display.</p>
+                )}
             </Modal.Body>
         </Modal>
     );

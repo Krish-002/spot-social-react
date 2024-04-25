@@ -17,8 +17,8 @@ const api = axios.create({
     withCredentials: true
   });
 
-export const getUsersByUsername = async (username: string) => {
-    const response = await api.get(`${USER_API}?username=${encodeURIComponent(username)}`);
+export const getUserByUsername = async (username: string) => {
+    const response = await api.get(`${USER_API}/${encodeURIComponent(username)}`);
     return response.data;
 };
 

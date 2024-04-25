@@ -6,6 +6,8 @@ import Post from './Post';
 import { FaCalendarAlt, FaUtensils, FaDumbbell } from 'react-icons/fa';
 import "./index.css";
 import * as client from './client';
+import { useSelector } from 'react-redux';
+import { RootState } from '../Store';
 
 import User from '../Interfaces/User';
 import GymSplitData from '../Interfaces/GymSplit';
@@ -15,18 +17,24 @@ import PostData from '../Interfaces/PostData';
 
 
 const Profile: React.FC = () => {
-  const [userProfile, setUserProfile] = useState<User | null>();
+
+  const [userProfile, setUserProfile] = useState<User>();
   const [gymSplits, setGymSplits] = useState<GymSplitData[]>([]);
   const [mealPlans, setMealPlans] = useState<MealPlanData[]>([]);
   const [gymStatistics, setGymStatistics] = useState<GymStatistic[]>([]);
   const [posts, setPosts] = useState<PostData[]>([]);
-  const userId = "active_amy"; // Replace with actual logic to determine userId if needed
+  const user = useSelector((state: RootState) => state.auth.user);
+  console.log('user', user);
+
+
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const userProfile = await client.getUsersByUsername(userId);
-        setUserProfile(userProfile);
+        if (user) {
+          const userProfile = await client.getUserByUsername(user.username);
+          setUserProfile(userProfile);
+        }
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }
@@ -35,11 +43,50 @@ const Profile: React.FC = () => {
     fetchProfile();
   }, []);
 
-  useEffect(()=> {
-    console.log('userProfile', userProfile);
-    console.log('userProfile.gym', userProfile?.gymSplitIds);
+    useEffect(() => {
+    const fetchGymSplits = async () => {
+      const fetchedGymSplits: GymSplitData[] = [];
+      if (userProfile) {
+        for (const id of userProfile.gymSplitIds) {
+          const gymSplit = await client.getGymSplitsById(id);
+          fetchedGymSplits.push(gymSplit);
+        }
+      }
+      setGymSplits(fetchedGymSplits);
+    };
+
+
+    fetchGymSplits();
   }, [userProfile?.gymSplitIds]);
 
+useEffect(() => {
+    const fetchMealPlan = async () => {
+        const fetchedMealPlan: MealPlanData[] = [];
+        if(userProfile){
+        for (const id of userProfile.mealPlanIds) {
+            const mealPlan = await client.getMealPlanById(id);
+            fetchedMealPlan.push(mealPlan);
+        }
+      }
+        setMealPlans(fetchedMealPlan);
+    };
+    fetchMealPlan();
+
+}, [userProfile?.mealPlanIds]);
+
+useEffect(() => {
+    const fetchGymStatistics = async () => {
+        const fetchedGymStatistics: GymStatistic[] = [];
+        if(userProfile){
+        for (const id of userProfile.gymStatisticIds) {
+            const gymStatistic = await client.getGymStatisticsById(id);
+            fetchedGymStatistics.push(gymStatistic);
+        }
+      }
+        setGymStatistics(fetchedGymStatistics);
+    };
+    fetchGymStatistics();
+}, [userProfile?.gymStatisticIds]);
 
   useEffect(() => {
     if (userProfile && userProfile.mealPlanIds) {
@@ -57,19 +104,19 @@ const Profile: React.FC = () => {
   }, [userProfile?.mealPlanIds]);
 
   useEffect(() => {
-    if (userProfile && userProfile.gymStatisticIds) {
-      const fetchGymStatistics = async () => {
-        const fetchedGymStatistics = [];
-        for (const id of userProfile.gymStatisticIds) {
-          const gymStatistic = await client.getGymStatisticsById(id);
-          fetchedGymStatistics.push(gymStatistic);
+    if (userProfile && userProfile.postIds) {
+      const fetchPosts = async () => {
+        const fetchedPosts = [];
+        for (const id of userProfile.postIds) {
+          const post = await client.getPostById(id);
+          fetchedPosts.push(post);
         }
-        setGymStatistics(fetchedGymStatistics);
+        setPosts(fetchedPosts);
       };
 
-      fetchGymStatistics();
+      fetchPosts();
     }
-  }, [userProfile?.gymStatisticIds]);
+  }, [userProfile?.postIds]);
 
   if (!userProfile) {
     return <div>Loading...</div>;
@@ -97,13 +144,15 @@ const Profile: React.FC = () => {
           <h3 className="heading"><FaDumbbell className="header-icon" />Gym Stats</h3>
           <GymStatistics statistics={gymStatistics} />
         </div>
-        <div className="posts-header">
-          <h3>User Posts</h3>
-          {posts.map((post, index) => (
-            <Post key={index} post={post} />
-          ))}
-        </div>
       </div>
+      <div className="posts-header">
+          <h3>User Posts</h3>
+        </div>
+        <div className='kb-post-container card-container'>
+        {posts.map((post, index) => (
+            <Post key={index} post={post}/>
+          ))}
+          </div>
     </div>
   );
 };

@@ -1,4 +1,11 @@
 /* General Styles */
+
+.kb-post-container{
+    display: flex;                /* Makes the container a flex container */
+    justify-content: space-around;/* Distributes space around items */
+           /* Vertically aligns items in the center */
+    padding: 20px;   
+}
 body {
     background-color: black;
     color: white;

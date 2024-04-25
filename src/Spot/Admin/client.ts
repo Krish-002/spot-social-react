@@ -14,6 +14,21 @@ export const GYMSTATS_API = `${BASE_API}/api/gymStatistics`;
 export const MEALPLAN_API = `${BASE_API}/api/mealplans`;
 
 
+interface MealPlanAdd {
+    name: string;
+    link: string;
+    calories: number;
+}
+interface GymSplitAdd {
+    dayOfWeek: string;
+    musclesTrained: string[];
+}
+interface GymStatisticAdd {
+    exercise: string;
+    weight: number;
+    unit: string;
+}
+
 const api = axios.create({
     withCredentials: true
   });
@@ -29,8 +44,8 @@ export const deleteUser = async (_id: string) => {
     return response.data;
 };
 
-export const updateUser = async (username: string, data: User) => {
-    const response = await api.put(`${USER_API}?username=${encodeURIComponent(username)}`, data);
+export const updateUser = async (_id: string, data: User) => {
+    const response = await api.put(`${USER_API}/${encodeURIComponent(_id)}`, data);
     return response.data;
 };
 
@@ -75,6 +90,7 @@ export const deleteMealPlan = async (_id: string) => {
 };
 
 export const updateGymSplit = async (id: string, data: GymSplit) => {
+    console.log('data',data);
     const response = await api.put(`${GYMSPLIT_API}/${encodeURIComponent(id)}`, data);
     return response.data;
 };
@@ -111,3 +127,17 @@ export const createAdmin = async (adminData: { firstName: string, lastName: stri
 
 
 
+export const createMealPlan = async (data: MealPlanAdd) => {
+    const response = await api.post(`${MEALPLAN_API}`, data);
+    return response.data;
+}
+
+export const createGymSplit = async (data: GymSplitAdd) => {
+    const response = await api.post(`${GYMSPLIT_API}`, data);
+    return response.data;
+}
+
+export const createGymStats = async (data: GymStatisticAdd) => {
+    const response = await api.post(`${GYMSTATS_API}`, data);
+    return response.data;
+}

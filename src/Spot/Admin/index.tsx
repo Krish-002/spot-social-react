@@ -31,36 +31,36 @@ function AdminHomePage() {
         setEditingUser(user);
     };
 
-  const handleSearch = async () => {
-    try {
-      const response = await client.getUsersByUsername(searchTerm);
-      setUsers(response);
-    } catch (error) {
-      console.error("Failed to fetch users:", error);
-      setUsers([]);
-    }
-  };
+    const handleSearch = async () => {
+        try {
+            const response = await client.getUsersByUsername(searchTerm);
+            setUsers(response);
+        } catch (error) {
+            console.error("Failed to fetch users:", error);
+            setUsers([]);
+        }
+    };
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      if (searchTerm) {
-        handleSearch();
-      } else {
-        setUsers([]);
-      }
-    }, 300);
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            if (searchTerm) {
+                handleSearch();
+            } else {
+                setUsers([]);
+            }
+        }, 300);
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchTerm]);
 
-  const handleDelete = async (userId: string) => {
-    try {
-      await client.deleteUser(userId);
-      setUsers(users.filter(user => user._id !== userId));
-    } catch (error) {
-      console.error("Failed to delete ", error);
-    }
-  };
+    const handleDelete = async (userId: string) => {
+        try {
+            await client.deleteUser(userId);
+            setUsers(users.filter(user => user._id !== userId));
+        } catch (error) {
+            console.error("Failed to delete ", error);
+        }
+    };
 
     return (
         <div>
@@ -73,6 +73,16 @@ function AdminHomePage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
+            {editingUser && (
+                <EditUserForm
+                    user={editingUser}
+                    onSave={(updatedUser) => {
+                        // Implement API call to save the user details
+                        console.log('Save user', updatedUser);
+                        setEditingUser(null);
+                    }}
+                    onCancel={() => setEditingUser(null)}
+                />)}
             <Table className="kb-table">
                 <thead>
                     <tr>

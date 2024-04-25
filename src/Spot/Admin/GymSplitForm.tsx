@@ -6,10 +6,12 @@ import GymSplit from '../Interfaces/GymSplit';
 interface Props {
     gymSplits: GymSplit[];
     setGymSplits: (splits: GymSplit[]) => void;
-    
+    onRemoveGymSplit: (updatedGymSplits: GymSplit[]) => void;  // New prop
+    onCreateGymSplit: () => void;  // Ensure this prop is included
+
 }
 
-const GymSplitForm: React.FC<Props> = ({ gymSplits, setGymSplits }) => {
+const GymSplitForm: React.FC<Props> = ({ gymSplits, setGymSplits, onRemoveGymSplit, onCreateGymSplit }) => {
     const handleDayOfWeekChange = (index: number, day: string) => {
         const updatedSplits = [...gymSplits];
         updatedSplits[index].dayOfWeek = day;
@@ -23,13 +25,14 @@ const GymSplitForm: React.FC<Props> = ({ gymSplits, setGymSplits }) => {
     };
 
     const addGymSplit = () => {
-        setGymSplits([...gymSplits, { _id: '', dayOfWeek: '', musclesTrained: [] }]);
-    };
+        onCreateGymSplit();
+        };
 
     const removeGymSplit = (index: number) => {
         const updatedSplits = [...gymSplits];
         updatedSplits.splice(index, 1);
         setGymSplits(updatedSplits);
+        onRemoveGymSplit(updatedSplits);  // Call the callback with updated splits
     };
 
     const muscleOptions = [

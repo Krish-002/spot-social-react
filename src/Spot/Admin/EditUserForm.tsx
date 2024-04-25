@@ -15,7 +15,6 @@ interface Props {
 }
 
 const EditUserForm: React.FC<Props> = ({ user, onSave, onCancel }) => {
-    console.log('user:', user);
     const [gymSplits, setGymSplits] = useState<GymSplit[]>([]);
     const [mealPlans, setMealPlans] = useState<MealPlan[]>([]);
     const [gymStatistics, setGymStatistics] = useState<GymStatistic[]>([]);
@@ -61,6 +60,15 @@ const EditUserForm: React.FC<Props> = ({ user, onSave, onCancel }) => {
         fetchGymStatistics();
     }, [user.gymStatisticIds]);
 
+    const handleGymSplitRemove = (updatedGymSplits: GymSplit[]) => {
+        setGymSplits(updatedGymSplits);
+        setEditedUser({
+            ...editedUser,
+            gymSplitIds: updatedGymSplits.map(split => split._id)
+        });
+    };
+
+
     const handleMealPlanChange = (index: number, field: keyof MealPlan, value: string) => {
         const updatedMealPlans = mealPlans.map((mealPlan, i) => {
             if (i === index) {
@@ -81,21 +89,62 @@ const EditUserForm: React.FC<Props> = ({ user, onSave, onCancel }) => {
         setGymStatistics(updatedGymStatistics);
     }
 
-    const addMealPlan = () => {
-        setMealPlans([...mealPlans, { _id: '', name: '', link: '', calories: 0 }]);
+    const handleGymSplitAdd = async () => {
+        const newGymSplit = { dayOfWeek: 'Sunday', musclesTrained: ["Abs"] };
+        try {
+            const createdGymSplit = await client.createGymSplit(newGymSplit);
+            setGymSplits([...gymSplits, createdGymSplit]);
+            setEditedUser({ ...editedUser, gymSplitIds: [...editedUser.gymSplitIds, createdGymSplit._id] });
+        } catch (error) {
+            console.error("Failed to create gym split:", error);
+        }
     }
+
+    const addMealPlan = async () => {
+        const newMealPlan = {name: 'Default Name', link: 'Default Link', calories: 0 };
+        try {
+            const createdMealPlan = await client.createMealPlan(newMealPlan);  // Now awaited
+            setMealPlans([...mealPlans, createdMealPlan]);  // Assuming you want to use the returned object
+            setEditedUser({ ...editedUser, mealPlanIds: [...editedUser.mealPlanIds, createdMealPlan._id] });
+        } catch (error) {
+            console.error("Failed to create meal plan:", error);
+        }
+    }
+    
     const deleteMealPlan = (index: number) => {
         const updatedMealPlans = mealPlans.filter((_, i) => i !== index);
         setMealPlans(updatedMealPlans);
+        setEditedUser({ ...editedUser, mealPlanIds: updatedMealPlans.map(mealPlan => mealPlan._id) });
+
     }
 
-    const addGymStatistic = () => {
-        setGymStatistics([...gymStatistics, { _id: '', exercise: '', weight: 0, unit: '' }]);
+    const addGymStatistic = async () => {
+        // Define the new gym statistic object
+        const newGymStat = {
+            exercise: 'Default Exercise',  // Replace 'Default Exercise' with user input if applicable
+            weight: 0,  // Set a valid default weight
+            unit: 'kg'  
+        };
+    
+        try {
+            // Create the new gym statistic in the backend and receive the created object
+            const createdGymStat = await client.createGymStats(newGymStat);
+    
+            // Add the newly created gym statistic to the gymStatistics array in the state
+            setGymStatistics([...gymStatistics, createdGymStat]);
+            setEditedUser({ ...editedUser, gymStatisticIds: [...editedUser.gymStatisticIds, createdGymStat._id] });
+    
+        } catch (error) {
+            console.error("Failed to create gym statistic:", error);
+            // Optionally handle the error, e.g., by showing an error message to the user
+        }
     }
+    
 
     const deleteGymStatistic = (index: number) => {
         const updatedGymStatistics = gymStatistics.filter((_, i) => i !== index);
         setGymStatistics(updatedGymStatistics);
+        setEditedUser({ ...editedUser, gymStatisticIds: updatedGymStatistics.map(gymStatistic => gymStatistic._id) });
     }
 
     const [editedUser, setEditedUser] = useState(user);
@@ -104,10 +153,36 @@ const EditUserForm: React.FC<Props> = ({ user, onSave, onCancel }) => {
         setEditedUser({ ...editedUser, [field]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        onSave(editedUser);
+    
+        try {
+            // Update Gym Splits
+            for (const gymSplit of gymSplits) {
+                await client.updateGymSplit(gymSplit._id, gymSplit);
+            }
+    
+            // Update Meal Plans
+            for (const mealPlan of mealPlans) {
+                await client.updateMealPlan(mealPlan._id, mealPlan);
+            }
+    
+            // Update Gym Statistics
+            for (const gymStatistic of gymStatistics) {
+                await client.updateGymStats(gymStatistic._id, gymStatistic);
+            }
+    
+            // Update User
+            console.log('editedUser:', editedUser);
+            await client.updateUser(editedUser._id, editedUser);
+            onSave(editedUser); // This will close the form and optionally refresh the user list
+            alert('User and related data updated successfully!');
+        } catch (error) {
+            console.error("Failed to update user and related data:", error);
+            alert('Failed to update data.');
+        }
     };
+    
 
     return (
         <Modal className='kb-form-big-container' show onHide={onCancel}>
@@ -168,7 +243,8 @@ const EditUserForm: React.FC<Props> = ({ user, onSave, onCancel }) => {
                         />
                     </Form.Group>
                     <h2 className='kb-header-seperate'>Gym Splits</h2>
-                    <GymSplitForm gymSplits={gymSplits} setGymSplits={setGymSplits} />
+                    <GymSplitForm gymSplits={gymSplits} setGymSplits={setGymSplits} onRemoveGymSplit={handleGymSplitRemove}
+                    onCreateGymSplit={handleGymSplitAdd} />
                     <h2 className='kb-header-seperate'>Meal Plans</h2>
                     <ListGroup variant="flush">
                         {mealPlans.map((mealPlan, index) => (
@@ -238,7 +314,6 @@ const EditUserForm: React.FC<Props> = ({ user, onSave, onCancel }) => {
                                     <Form.Label className='kb-form-label'>Unit</Form.Label>
                                     <Form.Control
                                         className="kb-form-control"
-
                                         type="text"
                                         value={gymStatistic.unit}
                                         onChange={(e) => handleGymStatisticChange(index, 'unit', e.target.value)} />

@@ -9,6 +9,7 @@ import store from "./Store";
 import RedirectPage from "./Post/RedirectPage";
 import Feed from "./Feed";
 import Signin from "./Login/Signin";
+import AdminSignin from "./Admin/Signin";
 
 const Spot = () => {
   return (
@@ -19,6 +20,7 @@ const Spot = () => {
     <Routes>
       <Route path="/" element={<Navigate to="/Feed" />} />
       <Route path="/Signin" element={<Signin />} />
+      <Route path="/Admin/Signin" element={<AdminSignin />} />
       <Route path="/Profile/*" element={<Profile/>} />
       <Route path="/Post/*" element={<PostScreen />} />
       <Route path="/Admin" element={<AdminHomePage />} />

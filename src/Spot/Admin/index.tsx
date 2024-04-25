@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table, Form } from 'react-bootstrap';
+import { Button, Form, Table } from 'react-bootstrap';
 import * as client from './client';
 import './Admin.css';
 import EditUserForm from './EditUserForm';
+import AdminAddModal from './AdminAddModal';
 import User from '../Interfaces/User';
-import GymSplit from '../Interfaces/GymSplit';
-import MealPlan from '../Interfaces/MealPlan';
-import GymStatistic from '../Interfaces/GymStatistic';
-import PostData from '../Interfaces/PostData';
-
 
 function AdminHomePage() {
     const [users, setUsers] = useState<User[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [editingUser, setEditingUser] = useState<User | null>(null);
+    const [showAddAdminModal, setShowAddAdminModal] = useState(false);
+    const [currentAdmin, setCurrentAdmin] = useState({ firstName: '', lastName: '', username: '', password: '' });
 
-const handleUpdate = (user: User) => {
-  setEditingUser(user);
-};
+    useEffect(() => {
+        const fetchAdminDetails = async () => {
+            try {
+                const adminId = '662a0f75c3dcf55281db8886';
+                const adminData = await client.getAdminById(adminId);
+                setCurrentAdmin(adminData);
+            } catch (error) {
+                console.error("Failed to fetch admin details:", error);
+            }
+        };
 
+        fetchAdminDetails();
+    }, []);
+
+    const handleUpdate = (user: User) => {
+        setEditingUser(user);
+    };
 
     const handleSearch = async () => {
         try {
@@ -53,7 +64,8 @@ const handleUpdate = (user: User) => {
 
     return (
         <div>
-            <h1>Admin Home Page</h1>
+            <h1>Hello Admin: {currentAdmin.firstName} {currentAdmin.lastName}</h1>
+            <Button className="sp-admin-btn-primary" onClick={() => setShowAddAdminModal(true)}>Add New Admin</Button>
             <Form.Control
                 type="text"
                 className="kb-search-input"
@@ -61,17 +73,6 @@ const handleUpdate = (user: User) => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-            {editingUser && (
-      <EditUserForm
-        user={editingUser}
-        onSave={(updatedUser) => {
-          // Implement API call to save the user details
-          console.log('Save user', updatedUser);
-          setEditingUser(null);
-        }}
-        onCancel={() => setEditingUser(null)}
-      />
-    )}
             <Table className="kb-table">
                 <thead>
                     <tr>
@@ -95,6 +96,7 @@ const handleUpdate = (user: User) => {
                     ))}
                 </tbody>
             </Table>
+            <AdminAddModal show={showAddAdminModal} handleClose={() => setShowAddAdminModal(false)} />
         </div>
     );
 }

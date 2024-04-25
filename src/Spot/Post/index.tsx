@@ -11,15 +11,27 @@ import Dashboard from './Dashboard';
 import NotFoundPage from './NotFoundPage';
 import * as client from './client';
 import { clearSelectedTrack } from '../Reducers/tracks'; // Correct path is needed
-
-
-
+import { setUser } from '../Reducers/authSlice'; // Correct path is needed
 
 function PostScreen() {
     const dispatch = useDispatch();
+    const sessionDataJson = localStorage.getItem('sessionData');
+    const sessionData = sessionDataJson ? JSON.parse(sessionDataJson) : null;
+    const user = useSelector((state: RootState) => state.auth.user);
+    if (!user) {
+        if (sessionData && sessionData.user) {
+            console.log("Reauthenticating user", sessionData.user);
+            dispatch(setUser(sessionData.user));  // Reauthenticate by setting the user in the global state
+        } else {
+            throw new Error("Session data is missing");
+        }
+    }
+
     const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
     const selectedTrack = useSelector((state: RootState) => state.tracks.selectedTrack);
-
+    if (!user) {
+        return <div>Not logged in</div>;
+    }
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
             setSelectedImageFile(event.target.files[0]); // Store the file itself, not just the URL
@@ -33,6 +45,7 @@ function PostScreen() {
         }
 
         const formData = new FormData();
+        formData.append('postedBy', user._id);
         formData.append('image', selectedImageFile);
         formData.append('songImageUrl', selectedTrack.album.images[0].url);
         formData.append('songName', selectedTrack.name);
@@ -40,7 +53,14 @@ function PostScreen() {
 
         try {
             const response = await client.createPost(formData);
-            console.log(response);
+
+
+            const updatedPosts = [...user.postIds, response._id]; // Directly add the new post ID
+            const updatedUser = { ...user, postIds: updatedPosts }; // Spread the existing user and update the postIds field
+
+            const userData = await client.updateUser(user._id, updatedUser);
+            dispatch(setUser(updatedUser));
+            console.log("msg", userData);
             setSelectedImageFile(null);
             dispatch(clearSelectedTrack());
         } catch (error) {
@@ -64,7 +84,7 @@ function PostScreen() {
                 </div>
                 <div className="d-flex flex-column justify-content-center align-items-center kb-half-screen kb-input-group">
                     <Routes>
-                        <Route path="/" element={<Home />}/>
+                        <Route path="/" element={<Home />} />
                         <Route path="/redirect" element={<RedirectPage />} />
                         <Route path="/Dashboard" element={<Dashboard />} />
                         <Route element={<NotFoundPage />} />

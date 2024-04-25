@@ -4,6 +4,7 @@ interface PostData {
     songImageUrl: string;
     songName: string;
     artistName: string;
+    postedBy: string;
     likes: string[];
 }
 

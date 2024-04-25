@@ -168,6 +168,7 @@ const ProfileSettings: React.FC<Props> = ({ user, onSave, onCancel }) => {
             // Upload the image first and then get the URL to save with the user profile
             const imageUrl = await client.uploadImage(userId, selectedImage);
             setEditedUser({ ...editedUser, profilePictureUrl: imageUrl });
+            editedUser.profilePictureUrl = imageUrl;
         }
 
         try {

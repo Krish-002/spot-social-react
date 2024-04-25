@@ -35,11 +35,15 @@
 .heart-button {
     background: none;
     border: none;
-    color: white;
+    color: white; /* Default color, change if you want something else when not focused on heart */
     font-size: 1.2em;
     cursor: pointer;
     display: flex;
     align-items: center;
+}
+
+.heart-button.red-heart {
+    color: red; /* Color for both the icon and text */
 }
 
 .profile-image {
@@ -52,4 +56,13 @@
 .profile-info,
 .username-text {
     font-size: 0.85em;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
 }

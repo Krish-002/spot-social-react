@@ -46,7 +46,7 @@
 .sp-admin-input-field {
     background-color: black;
     color: white;
-    border: 1px solid purple;
+    border: 1px solid #7009e3;
     padding: 10px;
     margin-bottom: 10px;
     width: calc(100% - 20px);
@@ -59,7 +59,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    background-color: purple;
+    background-color: #7009e3;
     color: white;
 }
 

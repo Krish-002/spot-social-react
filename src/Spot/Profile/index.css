@@ -61,7 +61,7 @@ body {
   
 .profile-username {
     font-size: 1.2em;
-    background: purple;
+    background: #7009e3;
     padding: 3px 8px;
     border-radius: 15px;
 }
@@ -79,7 +79,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid purple;
+    border: 2px solid #7009e3;
     border-radius: 20px;
     padding: 10px;
     overflow-y: auto;
@@ -89,7 +89,7 @@ body {
 /* Heading Styles */
 .heading {
     font-size: 1.25em;
-    background: purple;
+    background: #7009e3;
     padding: 5px;
     border-radius: 15px;
     width: 100%;
@@ -129,7 +129,7 @@ body {
   
 /* Gym Statistics Specific */
 .gym-stat-item {
-    border: 1px solid purple;
+    border: 1px solid #7009e3;
     padding: 5px;
     margin: 5px;
     display: flex;

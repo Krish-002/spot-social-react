@@ -8,7 +8,7 @@
   .sp-input-field {
     background-color: black;
     color: white;
-    border: 1px solid purple;
+    border: 1px solid #7009e3;
     padding: 10px;
     margin-bottom: 10px;
     width: calc(100% - 20px);
@@ -24,12 +24,12 @@
   }
   
   .sp-btn-primary {
-    background-color: purple;
+    background-color: #7009e3;
     color: white;
   }
   
   .sp-btn-secondary {
-    background-color: purple;
+    background-color: #7009e3;
     color: white;
   }
   

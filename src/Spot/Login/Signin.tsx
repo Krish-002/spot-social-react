@@ -37,10 +37,12 @@ export default function Signin() {
         value={credentials.password}
         onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
       />
-      <button className="btn btn-primary sp-btn-primary" onClick={handleSignin}>Signin</button>
-      <button className="btn btn-secondary sp-btn-secondary" onClick={() => setShowSignupModal(true)}>Signup</button>
-      <button className="btn btn-tertiary sp-btn-tertiary" onClick={() => navigate("/Spot/Feed")}>Continue as Guest</button>
-      <button className="btn btn-tertiary sp-btn-tertiary" onClick={() => navigate("/Spot/Admin/Signin")}>Proceed as Admin</button>
+      <div className="kb-login-page-container">
+      <button className="sp-btn btn btn-primary sp-btn-primary" onClick={handleSignin}>Signin</button>
+      <button className="sp-btn btn btn-secondary sp-btn-secondary" onClick={() => setShowSignupModal(true)}>Signup</button>
+      <button className="sp-btn btn btn-tertiary sp-btn-tertiary" onClick={() => navigate("/Spot/Feed")}>Continue as Guest</button>
+      <button className="sp-btn btn btn-tertiary sp-btn-tertiary" onClick={() => navigate("/Spot/Admin/Signin")}>Proceed as Admin</button>
+      </div>
       {showSignupModal && (
         <div className="sp-modal">
           <div className="sp-modal-content">

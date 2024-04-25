@@ -44,8 +44,4 @@
     text-align: center;
 }
 
-/* Button styling, if needed to adjust */
-.sp-btn-secondary {
-    width: 100%; /* Make button stretch to the width of the card */
-    margin-top: 10px; /* Space between button and text */
-}
+

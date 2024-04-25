@@ -10,7 +10,7 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ post, onDelete }) => {
     return (
-        <div className="card">
+        <div className="card sp-card">
             <img src={post.imageUrl} className="card-img-top" alt="Post" />
             <div className="card-body">
                 <div className="d-flex justify-content-between">

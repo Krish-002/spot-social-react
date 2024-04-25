@@ -24,9 +24,6 @@ function SpotNavigation() {
 
   return (
     <div>
-      <div className="img-container">
-        <img src="https://storage.cloud.google.com/spot_social_posts/spotlogo.png" alt="Spot Logo"></img>
-      </div>
       <ul className="nav p-2 justify-content-between kb-navbar-container">
         {links.map((link, index) => (
           <li key={index} className={`kb-navbar-items nav-item ${pathname.includes(link.label) ? "kb-active" : ""}`}>

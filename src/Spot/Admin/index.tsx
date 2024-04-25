@@ -5,8 +5,9 @@ import './Admin.css';
 import EditUserForm from './EditUserForm';
 import AdminAddModal from './AdminAddModal';
 import User from '../Interfaces/User';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../Store';
+import {logoutAdmin} from '../Reducers/adminSlice';
 
 function AdminHomePage() {
   const [users, setUsers] = useState<User[]>([]);
@@ -15,6 +16,7 @@ function AdminHomePage() {
   const [showAddAdminModal, setShowAddAdminModal] = useState(false);
   const [currentAdmin, setCurrentAdmin] = useState({ firstName: '', lastName: '', username: '', password: '' });
   const admin = useSelector((state: RootState) => state.admin.admin);
+    const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchAdminDetails = async () => {
@@ -31,7 +33,10 @@ function AdminHomePage() {
 
     fetchAdminDetails();
   }, []);
-
+  const handleLogout = () => {
+    dispatch(logoutAdmin());
+    window.location.href = '/Spot/Signin'; // Adjust as necessary for your routing
+  };
   const handleUpdate = (user: User) => {
     setEditingUser(user);
   };
@@ -75,6 +80,8 @@ function AdminHomePage() {
     <div>
       <h1>Hello Admin: {currentAdmin.firstName} {currentAdmin.lastName}</h1>
       <Button className="sp-admin-btn-primary" onClick={() => setShowAddAdminModal(true)}>Add New Admin</Button>
+      <Button className="logout-button sp-admin-btn-primary" onClick={handleLogout}>Logout</Button> {/* Add logout button */}
+
       <Form.Control
         type="text"
         className="kb-search-input"

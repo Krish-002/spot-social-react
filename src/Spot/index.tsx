@@ -18,6 +18,9 @@ const Spot = () => {
 
   return (
     <Provider store={store}>
+            <div className="img-container">
+        <img src="https://storage.cloud.google.com/spot_social_posts/spotlogo.png" alt="Spot Logo"></img>
+      </div>
       <div className="kb-container">
         {showNavigation && <SpotNavigation />}
 

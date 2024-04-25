@@ -22,8 +22,9 @@ function PostScreen() {
         if (sessionData && sessionData.user) {
             console.log("Reauthenticating user", sessionData.user);
             dispatch(setUser(sessionData.user));  // Reauthenticate by setting the user in the global state
+            localStorage.clear()// Clear the session data after reauthentication
         } else {
-            throw new Error("Session data is missing");
+            console.log("Session data is missing");
         }
     }
 

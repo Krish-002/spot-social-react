@@ -1,28 +1,24 @@
 import React from 'react';
-import './Post.css'; // Import the Post.css file
+import './Post.css';
+import PostData from '../Interfaces/PostData';
 
 interface PostProps {
-    imageUrl: string;
-    songImageUrl: string;
-    songName: string;
-    artistName: string;
-    likes: string[];
+    post: PostData;
 }
 
-const Post: React.FC<PostProps> = ({ imageUrl, songImageUrl, songName, artistName, likes }) => {
-    console.log('my print', imageUrl, songImageUrl, songName, artistName, likes);
+const Post: React.FC<PostProps> = ({ post }) => {
     return (
         <div className="card">
-            <img src={imageUrl} className="card-img-top" alt="Post" />
+            <img src={post.imageUrl} className="card-img-top" alt="Post" />
             <div className="card-body">
                 <button className="heart-button">
-                    <i className="fas fa-heart"></i> {likes.length}
+                    <i className="fas fa-heart"></i> {post.likes.length}
                 </button>
                 <div className="d-flex align-items-center">
-                    <img src={songImageUrl} alt="Song" className="profile-image" />
+                    <img src={post.songImageUrl} alt="Song" className="profile-image" />
                     <div>
-                        <p className="profile-info">{songName}</p>
-                        <p className="username-text">{artistName}</p>
+                        <p className="profile-info">{post.songName}</p>
+                        <p className="username-text">{post.artistName}</p>
                     </div>
                 </div>
             </div>

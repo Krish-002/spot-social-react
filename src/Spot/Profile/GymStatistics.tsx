@@ -1,11 +1,8 @@
 import React from 'react';
+import GymStatistic from '../Interfaces/GymStatistic';
 
 interface GymStatisticsProps {
-    statistics: Array<{
-        exercise: string;
-        weight: number;
-        unit: string;
-    }>;
+    statistics: GymStatistic[];
 }
 
 const GymStatistics: React.FC<GymStatisticsProps> = ({ statistics }) => {

@@ -1,11 +1,8 @@
 import React from 'react';
+import MealPlanData from '../Interfaces/MealPlan';
 
 interface MealPlanProps {
-    mealPlans: Array<{
-        name: string;
-        link: string;
-        calories: number;
-    }>;
+    mealPlans: MealPlanData[];
 }
 
 const MealPlan: React.FC<MealPlanProps> = ({ mealPlans }) => {

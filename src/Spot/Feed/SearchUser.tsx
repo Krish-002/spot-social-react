@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ListGroup, Image } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import * as client from './client';
 import './SearchUser.css'; // Import the CSS styles
 
@@ -14,19 +15,20 @@ interface User {
 const SearchUser = () => {
     const [username, setUsername] = useState('');
     const [users, setUsers] = useState<User[]>([]);
+    const navigate = useNavigate(); // Create a navigate function using the useNavigate hook
 
     const handleSearch = async () => {
-        if (username.trim()) {  // Check if the username input is not just empty spaces
+        if (username.trim()) {
             try {
                 const response = await client.getUsersByUsername(username);
                 console.log("Users:", response);
-                setUsers(response || []); // Ensure that response.data is used, assuming the API call is correct
+                setUsers(response || []);
             } catch (error) {
                 console.error("Failed to fetch users:", error);
                 setUsers([]);
             }
         } else {
-            setUsers([]); // Clear users when the input is empty
+            setUsers([]);
         }
     };
 
@@ -35,7 +37,7 @@ const SearchUser = () => {
             handleSearch();
         }, 500); // Debounce the search request
         return () => clearTimeout(timeoutId);
-    }, [username]); // Trigger the effect when 'username' changes
+    }, [username]);
 
     return (
         <div className="search-container">
@@ -50,7 +52,7 @@ const SearchUser = () => {
                 <ListGroup className="list-group-search mt-3">
                     {users.length > 0 ? (
                         users.map(user => (
-                            <ListGroup.Item key={user._id} className="d-flex align-items-center">
+                            <ListGroup.Item key={user._id} className="d-flex align-items-center" onClick={() => navigate(`/Spot/Profile/${user._id}`)} style={{ cursor: 'pointer' }}>
                                 <Image
                                     src={user.profilePictureUrl || "https://via.placeholder.com/60"}
                                     roundedCircle

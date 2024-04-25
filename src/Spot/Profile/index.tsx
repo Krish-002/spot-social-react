@@ -154,7 +154,7 @@ const Profile: React.FC = () => {
 
 
   if (!userProfile) {
-    return <div>Loading...</div>;
+    return <div>Please Log in</div>;
   }
 
   return (

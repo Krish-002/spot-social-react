@@ -1,13 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import tracksReducer from '../Reducers/tracks'; // Import your slice reducer
 import authReducer from '../Reducers/authSlice'; // Import your slice reducer
+import adminSlice from '../Reducers/adminSlice';
 
 
 const store = configureStore({
     reducer: {
       tracks: tracksReducer,
       auth: authReducer,
-
+      admin: adminSlice, // add the admin reducer
     },
   });
   

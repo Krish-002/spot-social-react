@@ -1,13 +1,14 @@
 .post-container {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping of cards in case of smaller screens */
+    flex-wrap: wrap; /* Enable wrapping */
     gap: 20px;
-    justify-content: center; /* Center-align the posts if they don't fill the entire width */
+    justify-content: center; /* Center the items horizontally */
+    margin: 0 auto; /* Optionally center the container itself if not already centered */
+    padding: 20px; /* Adds padding around the container for better spacing from edges */
 }
 
 .card {
-    flex: 1 1 300px; /* Allows each card to grow but base at 300px */
-    max-width: calc(33.33% - 40px); /* Assuming three columns with 20px gap */
+    flex: 0 1 calc(33.33% - 20px); /* No growth, shrink if necessary, calculate width to factor in gaps */
     background-color: black;
     border: 2px solid purple;
     border-radius: 20px;
@@ -16,6 +17,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    padding: 10px; /* Adjust padding to fit content nicely */
 }
 
 .card-img-top {
@@ -35,15 +37,11 @@
 .heart-button {
     background: none;
     border: none;
-    color: white; /* Default color, change if you want something else when not focused on heart */
+    color: red; /* Use red directly here for simplicity */
     font-size: 1.2em;
     cursor: pointer;
     display: flex;
     align-items: center;
-}
-
-.heart-button.red-heart {
-    color: red; /* Color for both the icon and text */
 }
 
 .profile-image {

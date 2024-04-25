@@ -1,11 +1,36 @@
 /* General Styles */
 
-.kb-post-container{
-    display: flex;                /* Makes the container a flex container */
-    justify-content: space-around;/* Distributes space around items */
-           /* Vertically aligns items in the center */
-    padding: 20px;   
+.kb-post-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px;
 }
+
+.card {
+    flex: 0 1 calc(33.33% - 40px); /* Default to three columns on large screens */
+    max-width: calc(33.33% - 40px);
+    margin-bottom: 20px;
+}
+
+/* Medium screens (tablets, large phones, small desktops) */
+@media (max-width: 1024px) {
+    .card {
+        flex: 0 1 calc(50% - 40px); /* Two columns on medium screens */
+        max-width: calc(50% - 40px);
+    }
+}
+
+/* Small screens (phones) */
+@media (max-width: 768px) {
+    .card {
+        flex: 0 1 calc(100% - 40px); /* One column on small screens */
+        max-width: calc(100% - 40px);
+    }
+}
+
+
 body {
     background-color: black;
     color: white;

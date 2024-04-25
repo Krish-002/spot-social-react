@@ -10,7 +10,7 @@ export const USER_API = `${BASE_API}/api/users`;
 export const POST_API = `${BASE_API}/api/posts`;
 export const GYMSPLIT_API = `${BASE_API}/api/gymSplits`;
 export const GYMSTATS_API = `${BASE_API}/api/gymStatistics`;
-export const MEALPLAN_API = `${BASE_API}/api/mealPlans`;
+export const MEALPLAN_API = `${BASE_API}/api/mealplans`;
 
 
 const api = axios.create({
@@ -48,7 +48,7 @@ export const getGymStatisticsById = async (id: string) => {
     return response.data;
 }
 
-export const getMealPlansById = async (id: string) => {
+export const getMealPlanById = async (id: string) => {
     const response = await api.get(`${MEALPLAN_API}/${encodeURIComponent(id)}`);
     return response.data;
 }

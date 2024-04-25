@@ -1,13 +1,30 @@
+.kb-form-div{
+    display: flex;
+}
+.kb-header-seperate{
+    color: black;
+}
+
+.kb-form-big-container{
+    --bs-modal-width: 700px;
+}
+
+.kb-form-container{
+    width: 95%;
+}
 .kb-form-group {
     display: flex;
+
     align-items: center;
     margin-bottom: 1rem;
   }
   
   .kb-form-label {
     flex: 0 0 20%; /* Adjust the width as needed */
+    width: 100%;
     margin-right: 1rem;
     color: black;
+    margin: auto;
   }
   
   .kb-form-control {

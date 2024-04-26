@@ -25,8 +25,8 @@ const Spot = () => {
         {showNavigation && <SpotNavigation />}
 
         <Routes>
-          <Route path="/" element={<Navigate to="/Signin" />} />
-          <Route path="/Signin" element={<Signin />} />
+          <Route path="/*" element={<Navigate to="Signin" />} />
+          <Route path="Signin" element={<Signin />} />
           <Route path="/Admin/Signin" element={<AdminSignin />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/Profile/:userId" element={<OtherProfile />} />

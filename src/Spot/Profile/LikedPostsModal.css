@@ -12,7 +12,7 @@
 }
 
 /* Style for each Liked Post card to ensure proper sizing and no squishing */
-.sp-card {
+.sp-card-lm {
     display: flex;
     flex-direction: column;
     align-items: center;
